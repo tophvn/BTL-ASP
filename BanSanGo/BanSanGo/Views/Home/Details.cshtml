@@ -1,0 +1,26 @@
+﻿@model BanSanGo.Models.product
+
+@{
+    ViewBag.Title = "Chi Tiết Sản Phẩm - " + Model.name;
+    Layout = "~/Views/Shared/_Layout.cshtml"; // Dùng layout nếu có
+}
+
+<div class="container">
+    <h2>@Model.name</h2>
+    <div class="row">
+        <div class="col-md-6">
+            <img src="@Model.image" class="img-fluid" alt="@Model.name" style="height: auto; max-height: 400px; object-fit: cover;">
+        </div>
+        <div class="col-md-6">
+            <h4>Thông Tin Sản Phẩm</h4>
+            <p><strong>Giá:</strong> @String.Format("{0:N0} VND", Model.price)</p>
+            <p><strong>Chi tiết:</strong> @Model.details</p>
+            <p><strong>Độ dày:</strong> @Model.thickness cm</p>
+            <p><strong>Chiều rộng:</strong> @Model.width cm</p>
+            <p><strong>Chiều dài:</strong> @Model.length cm</p>
+            <p><strong>Bảo hành:</strong> @Model.warranty</p>
+            <a href="/Cart/Add/@Model.id" class="btn btn-success">Thêm vào giỏ hàng</a>
+            <a href="/Products" class="btn btn-secondary">Quay lại danh sách sản phẩm</a>
+        </div>
+    </div>
+</div>
