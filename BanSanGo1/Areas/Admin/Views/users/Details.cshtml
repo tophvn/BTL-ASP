@@ -1,0 +1,60 @@
+﻿@model BanSanGo1.Models.user
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Details</h2>
+
+    <div class="card shadow">
+        <div class="card-header bg-primary text-white">
+            <h4 class="mb-0">User Information</h4>
+        </div>
+        <div class="card-body">
+            <dl class="row">
+                <dt class="col-sm-4 font-weight-bold">
+                    @Html.DisplayNameFor(model => model.name)
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.name)
+                </dd>
+
+                <dt class="col-sm-4 font-weight-bold">
+                    @Html.DisplayNameFor(model => model.email)
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.email)
+                </dd>
+
+                <dt class="col-sm-4 font-weight-bold">
+                    @Html.DisplayNameFor(model => model.password)
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.password)
+                </dd>
+
+                <dt class="col-sm-4 font-weight-bold">
+                    @Html.DisplayNameFor(model => model.user_type)
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.user_type)
+                </dd>
+
+                <dt class="col-sm-4 font-weight-bold">
+                    @Html.DisplayNameFor(model => model.phone)
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.phone)
+                </dd>
+            </dl>
+        </div>
+        <div class="card-footer text-center">
+            <p>
+                @Html.ActionLink("Edit", "Edit", new { id = Model.id }, new { @class = "btn btn-primary mr-2" })
+                @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-secondary" })
+            </p>
+        </div>
+    </div>
+</div>

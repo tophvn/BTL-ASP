@@ -1,0 +1,30 @@
+﻿@model List<BanSanGo1.Models.product>
+
+@{
+    ViewBag.Title = "Trang Chủ";
+    ViewBag.CurrentPage = "Home"; 
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Danh Sách Sản Phẩm</h2>
+
+<div class="container">
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
+                <div class="card h-100">
+                    <img src="@item.image" class="card-img-top" alt="@item.name" style="height: 200px; object-fit: cover;">
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">@item.name</h5>
+                        <p class="card-text">Giá: @String.Format("{0:N0} VND", item.price)</p>
+                        <p class="card-text">Chi tiết: @(item.details.Length > 50 ? item.details.Substring(0, 50) + "..." : item.details)</p>
+                        <div class="mt-auto">
+                            <a href="@Url.Action("Details", "Home", new { id = item.id })" class="btn btn-primary">Xem Chi Tiết</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

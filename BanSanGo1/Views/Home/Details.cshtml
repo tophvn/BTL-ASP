@@ -1,0 +1,76 @@
+﻿@model BanSanGo1.Models.product
+
+@{
+    ViewBag.Title = "Chi Tiết Sản Phẩm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <style>
+        .product-image {
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+        }
+
+        .product-price {
+            font-size: 1.5rem;
+            color: #28a745;
+            font-weight: bold;
+        }
+
+        .btn-secondary {
+            margin-top: 15px;
+        }
+
+        .alert-warning {
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="card shadow-lg p-4">
+            <h2 class="text-center mb-4">@Model.name</h2>
+            <div class="row">
+                <div class="col-md-6 text-center">
+                    <img src="@Model.image" alt="@Model.name" class="img-fluid product-image" />
+                </div>
+                <div class="col-md-6">
+                    <h3 class="product-price">Giá: @(Model.price?.ToString("N0") ?? "Liên hệ") VNĐ</h3>
+                    <p class="mt-3">@Html.Raw(Model.details ?? "<i>Thông tin chi tiết không có sẵn</i>")</p>
+
+                    @if (Session["UserId"] == null)
+                    {
+                        <div class="alert alert-warning text-center mt-4">
+                            Bạn cần đăng nhập để thêm sản phẩm vào giỏ hàng.
+                        </div>
+                    }
+                    else
+                    {
+                        <form action="@Url.Action("AddToCart", "Home")" method="post" class="mt-4">
+                            <input type="hidden" name="productId" value="@Model.id" />
+                            <input type="hidden" name="name" value="@Model.name" />
+                            <input type="hidden" name="image" value="@Model.image" />
+                            <input type="hidden" name="price" value="@Model.price" />
+                            <div class="form-group">
+                                <label for="quantity">Số lượng:</label>
+                                <input type="number" name="quantity" id="quantity" class="form-control d-inline-block" value="1" min="1" style="width: 100px;" />
+                            </div>
+                            <button type="submit" class="btn btn-success btn-block">Thêm vào giỏ hàng</button>
+                        </form>
+                    }
+
+                    <a href="/" class="btn btn-secondary btn-block mt-3">Quay về trang chủ</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
